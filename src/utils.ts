@@ -139,7 +139,7 @@ function getReportHeaders(
 
     const storage = getAssemblyName(unittests)
 
-    const dllName = storage.split('/').pop()
+    const dllName = storage.split('\\').pop()
 
     if (dllName) {
       reportTitle = dllName.replace('.dll', '').toUpperCase().replace('.', ' ')
