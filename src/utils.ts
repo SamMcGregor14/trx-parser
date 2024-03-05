@@ -81,8 +81,8 @@ export async function transformTrxToJson(
         IsEmpty: IsEmpty(testData),
         ReportMetaData: {
           TrxFilePath: filePath,
-          ReportName: `${reportHeaders.reportName}-check`,
-          ReportTitle: reportHeaders.reportTitle,
+          ReportName: `SomeName`,
+          ReportTitle: `SomeTitle`,
           TrxJSonString: JSON.stringify(jsonString),
           TrxXmlString: xmlData
         }
@@ -132,15 +132,15 @@ function getReportHeaders(
   const isEmpty = IsEmpty(data)
 
   if (isEmpty) {
-    reportTitle = data.TestRun.ResultSummary.RunInfos.RunInfo._computerName
-    reportName = data.TestRun.ResultSummary.RunInfos.RunInfo._computerName.toUpperCase()
+    reportTitle = "isEmpty"
+    reportName = "isEmpty"
   } else {
     const unittests = data.TestRun?.TestDefinitions?.UnitTest
 
     const storage = getAssemblyName(unittests)
 
-    const dllName = storage.split('\\').pop()
-
+    const dllName = "NotEmpty"
+    
     if (dllName) {
       reportTitle = dllName.replace('.dll', '').toUpperCase().replace('.', ' ')
       reportName = dllName.replace('.dll', '').toUpperCase()
