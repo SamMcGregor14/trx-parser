@@ -15,7 +15,7 @@ export async function createCheckRun(
   reportPrefix?: string
 ): Promise<void> {
   try {
-    core.info(`Creating PR check for ${reportData.ReportMetaData.ReportTitle}`)
+    core.info(`Creating PR check for aaaaaaaaaaaaaaa`)
     const octokit = github.getOctokit(repoToken)
     let git_sha = github.context.sha
 
