@@ -81,8 +81,8 @@ export async function transformTrxToJson(
         IsEmpty: IsEmpty(testData),
         ReportMetaData: {
           TrxFilePath: filePath,
-          ReportName: `${reportHeaders.reportName}-check`,
-          ReportTitle: reportHeaders.reportTitle,
+          ReportName: `SomeName`,
+          ReportTitle: `SomeTitle`,
           TrxJSonString: JSON.stringify(jsonString),
           TrxXmlString: xmlData
         }
