@@ -15,7 +15,7 @@ export async function createCheckRun(
   reportPrefix?: string
 ): Promise<void> {
   try {
-    core.info(`Creating PR check for aaaaaaaaaaaaaaa`)
+    core.info(`Creating PR check for ${reportData.ReportMetaData.ReportTitle}`)
     const octokit = github.getOctokit(repoToken)
     let git_sha = github.context.sha
 
@@ -41,8 +41,8 @@ export async function createCheckRun(
     const markupData = getMarkupForTrx(reportData)
     const checkTime = new Date().toUTCString()
     const reportName = reportPrefix
-      ? reportPrefix.concat('-', "ReportName")
-      : "ReportName"
+      ? reportPrefix.concat('-', reportData.ReportMetaData.ReportName)
+      : reportData.ReportMetaData.ReportName
     core.info(`Check time is: ${checkTime}`)
     const response = await octokit.checks.create({
       owner: github.context.repo.owner,
@@ -53,11 +53,11 @@ export async function createCheckRun(
       conclusion:
         reportData.TrxData.TestRun.ResultSummary._outcome === 'Failed'
           ? ignoreTestFailures
-            ? 'failure'
+            ? 'neutral'
             : 'failure'
           : 'success',
       output: {
-        title: "ReportTitle",
+        title: reportData.ReportMetaData.ReportTitle,
         summary: `This test run completed at \`${checkTime}\``,
         // text: reportData.ReportMetaData.TrxJSonString
         text: markupData
