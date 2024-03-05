@@ -41,8 +41,8 @@ export async function createCheckRun(
     const markupData = getMarkupForTrx(reportData)
     const checkTime = new Date().toUTCString()
     const reportName = reportPrefix
-      ? reportPrefix.concat('-', reportData.ReportMetaData.ReportName)
-      : reportData.ReportMetaData.ReportName
+      ? reportPrefix.concat('-', "ReportName")
+      : "ReportName"
     core.info(`Check time is: ${checkTime}`)
     const response = await octokit.checks.create({
       owner: github.context.repo.owner,
@@ -53,11 +53,11 @@ export async function createCheckRun(
       conclusion:
         reportData.TrxData.TestRun.ResultSummary._outcome === 'Failed'
           ? ignoreTestFailures
-            ? 'neutral'
+            ? 'failure'
             : 'failure'
           : 'success',
       output: {
-        title: reportData.ReportMetaData.ReportTitle,
+        title: "ReportTitle",
         summary: `This test run completed at \`${checkTime}\``,
         // text: reportData.ReportMetaData.TrxJSonString
         text: markupData
