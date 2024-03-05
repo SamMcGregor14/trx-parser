@@ -53,7 +53,7 @@ export async function createCheckRun(
       conclusion:
         reportData.TrxData.TestRun.ResultSummary._outcome === 'Failed'
           ? ignoreTestFailures
-            ? 'neutral'
+            ? 'failure'
             : 'failure'
           : 'success',
       output: {
