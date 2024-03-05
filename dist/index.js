@@ -78,7 +78,7 @@ function createCheckRun(repoToken, ignoreTestFailures, reportData, sha, reportPr
                 status: 'completed',
                 conclusion: reportData.TrxData.TestRun.ResultSummary._outcome === 'Failed'
                     ? ignoreTestFailures
-                        ? 'neutral'
+                        ? 'failure'
                         : 'failure'
                     : 'success',
                 output: {
@@ -627,7 +627,7 @@ function getReportHeaders(data) {
     else {
         const unittests = (_b = (_a = data.TestRun) === null || _a === void 0 ? void 0 : _a.TestDefinitions) === null || _b === void 0 ? void 0 : _b.UnitTest;
         const storage = getAssemblyName(unittests);
-        const dllName = storage.split('/').pop();
+        const dllName = storage.split('\\').pop();
         if (dllName) {
             reportTitle = dllName.replace('.dll', '').toUpperCase().replace('.', ' ');
             reportName = dllName.replace('.dll', '').toUpperCase();
