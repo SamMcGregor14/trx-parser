@@ -132,14 +132,14 @@ function getReportHeaders(
   const isEmpty = IsEmpty(data)
 
   if (isEmpty) {
-    reportTitle = data.TestRun.ResultSummary.RunInfos.RunInfo._computerName
-    reportName = data.TestRun.ResultSummary.RunInfos.RunInfo._computerName.toUpperCase()
+    reportTitle = "isEmpty"
+    reportName = "isEmpty"
   } else {
     const unittests = data.TestRun?.TestDefinitions?.UnitTest
 
     const storage = getAssemblyName(unittests)
 
-    const dllName = storage.substring(storage.lastIndexOf("\\") + 1)
+    const dllName = "NotEmpty"
     
     if (dllName) {
       reportTitle = dllName.replace('.dll', '').toUpperCase().replace('.', ' ')
