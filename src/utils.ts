@@ -76,12 +76,13 @@ export async function transformTrxToJson(
       }
 
       const reportHeaders = getReportHeaders(testData)
+      const checkName = filePath.split('\\').pop()?.replace('.trx', '')
       trxDataWrapper = {
         TrxData: jsonString as TrxData,
         IsEmpty: IsEmpty(testData),
         ReportMetaData: {
           TrxFilePath: filePath,
-          ReportName: `${reportHeaders.reportName}-check`,
+          ReportName: checkName,
           ReportTitle: reportHeaders.reportTitle,
           TrxJSonString: JSON.stringify(jsonString),
           TrxXmlString: xmlData

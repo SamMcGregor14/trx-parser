@@ -530,6 +530,7 @@ function getAbsoluteFilePaths(fileNames, directoryName) {
 }
 exports.getAbsoluteFilePaths = getAbsoluteFilePaths;
 function transformTrxToJson(filePath) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         let trxDataWrapper;
         if (fs.existsSync(filePath)) {
@@ -567,12 +568,13 @@ function transformTrxToJson(filePath) {
                     core.warning('There is trouble');
                 }
                 const reportHeaders = getReportHeaders(testData);
+                const checkName = (_a = filePath.split("\\").pop()) === null || _a === void 0 ? void 0 : _a.replace(".trx", "");
                 trxDataWrapper = {
                     TrxData: jsonString,
                     IsEmpty: IsEmpty(testData),
                     ReportMetaData: {
                         TrxFilePath: filePath,
-                        ReportName: `${reportHeaders.reportName}-check`,
+                        ReportName: checkName,
                         ReportTitle: reportHeaders.reportTitle,
                         TrxJSonString: JSON.stringify(jsonString),
                         TrxXmlString: xmlData
